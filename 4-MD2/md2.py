@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # S array that define the 0..255 permutation 
 S = [
 	41, 46, 67, 201, 162, 216, 124, 1, 61, 54, 84, 161, 236, 240, 6,
@@ -23,15 +26,11 @@ def padding(msg):
 	""" Padding of the message, append n bytes with n value to the message"""
 	
 	# Number of bytes to append
-	if len(msg) == 0:
-		n = 16
-	else:
-		n = 16 - len(msg)%16 if len(msg)%16 != 0 else 0
+	n = 16 - len(msg)%16
 
 	# Append n bytes with valu n
-	for i in range(n):
-		msg.append(n)
-
+	msg += [n for x in range(n)]
+	
 	return msg
 
 def checksum(padded_msg):
@@ -72,12 +71,9 @@ def digest(check_msg):
 
 	return msg_dig 
 
-message = [ord(c) for c in input()]
+message = [ord(c) for c in input().strip("\"")]
 
-print(message, len(message))
 padded_message = padding(message)
-print(padded_message, len(padded_message))
 check_message = checksum(padded_message)
-print(check_message, len(check_message))
 message_digest = digest(check_message)
-print(message_digest, len(message_digest))
+print(message_digest)

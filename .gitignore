@@ -1,2 +1,6 @@
 Lecturas/
 Presentaciones/
+Proyecto/
+__pycache__/
+*.docx
+*.pdf
